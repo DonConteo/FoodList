@@ -1,0 +1,105 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .head {
+            background-color: #151515;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 130px;
+            z-index: 1;
+         }
+         .header {
+            margin-top: 30px;
+            margin-left: 30px;
+         }
+         .header a {
+            margin-left: 20px;
+         }
+        #footer {
+            position: fixed;
+            width: 100%;
+            height: 40px;
+            bottom: 0;
+            background-color: #151515;
+            text-align: center;
+         }
+        #footer a {
+            font-size: 20px;
+            color: #949494;
+        }
+        .container {
+            margin-top: 250px;
+        }
+        #sub {
+            border:none;
+            padding:0;
+            margin:0;
+            font-size:25px;
+            color:#808080;
+            background-color:transparent;
+            font-family: Arial;
+            font-style: italic;
+            margin-right: 40px;
+        }
+        #reg {
+            text-align: right;
+        }
+        #righ {
+            margin-right: 40px;
+        }
+    </style>
+</head>
+<body>
+<header th:insert="blocks/fragments :: header"></header>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="border:2px solid #000">
+                    <img src="images/calculatorImg.jpg" width="100%" height="225">
+                    <div class="card-body">
+                        <p class="card-text"><strong>Калькулятор калорий</strong></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="/calculator"><button type="button" class="btn btn-sm btn-outline-secondary">Открыть</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="border:2px solid #000">
+                    <img src="images/FoodImg.jpg" width="100%" height="225">
+                    <div class="card-body">
+                        <p class="card-text"><strong>Список блюд</strong></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="/recipes"><button type="button" class="btn btn-sm btn-outline-secondary">Открыть</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card mb-4 shadow-sm" style="border:2px solid #000">
+                    <img src="images/ListImg.jpg" width="100%" height="225">
+                    <div class="card-body">
+                        <p class="card-text"><strong>Список продуктов</strong></p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="btn-group">
+                                <a href="/foodArray"><button type="button" class="btn btn-sm btn-outline-secondary">Открыть</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer id="footer"><a href="/developer">Связь с разработчиком</a></footer>
+</body>
+</html>

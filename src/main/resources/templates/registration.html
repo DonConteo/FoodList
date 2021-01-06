@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title th:text="${title}"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .head {
+            background-color: #151515;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 130px;
+            z-index: 1;
+         }
+         .header {
+            margin-top: 60px;
+            margin-right: 30px;
+            float: right;
+         }
+         .header a {
+            margin-left: 20px;
+         }
+        #footer {
+            position: fixed;
+            width: 100%;
+            height: 40px;
+            bottom: 0;
+            background-color: #151515;
+            text-align: center;
+         }
+        #footer a {
+            font-size: 20px;
+            color: #949494;
+        }
+        .parent {
+            width: 100%;
+            height: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            overflow: auto;
+        }
+        #registration {
+            width: 300px;
+            height: 300px;
+            border: 6px double black;
+            border-radius: 10px;
+        }
+        .block {
+            margin-top: 30px;
+            margin-left: 40px;
+        }
+        .block place {
+            margin-top: 10px;
+        }
+        .block p {
+            margin-bottom: 0px;
+        }
+        .block input {
+            width: 200px;
+        }
+        .but button {
+            width: 200px;
+            margin-bottom: 10px;
+        }
+        .but {
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+    <header class="head">
+        <nav class="header">
+            <a href="/home"><font size="5" color="#808080" face="Arial"><i> Вернуться на главную </i></font></a>
+        </nav>
+    </header>
+    <div class="parent">
+        <div id="registration">
+            <div class="block">
+                <form th:action="@{/registration}" method="POST">
+                    <div class="place">
+                        <p>Логин</p>
+                        <input placeholder="Придумайте имя" type="text" name="username">
+                    </div>
+                    <div class="place">
+                        <p>Пароль</p>
+                        <input placeholder="Придумайте пароль" type="password" name="password">
+                    </div>
+                    <div class="but">
+                        <button type="submit">Зарегистрироваться</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+<footer id="footer"><a href="/developer">Связь с разработчиком</a></footer>
+</body>
+</html>

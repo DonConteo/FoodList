@@ -1,0 +1,43 @@
+<div th:fragment="header">
+    <div class="head" background-color="#151515">
+        <nav class="header">
+            <table width="100%" cellspacing="0" cellpadding="5">
+                <tr>
+                    <td>
+                        <a><font size="5" color="#808080" face="Arial"><i>Здравствуйте, <span th:text="${user}"></span><span>!</span></i></font></a><br>
+                        <a href="/home"><font size="5" color="#808080" face="Arial"><i> Главная </i></font></a>
+                        <a href="/calculator"><font size="5" color="#808080" face="Arial"><i> Калькулятор </i></font></a>
+                        <a href="/recipes"><font size="5" color="#808080" face="Arial"><i> Рецепты </i></font></a>
+                        <a href="/foodArray"><font size="5" color="#808080" face="Arial"><i> Список продуктов </i></font></a>
+                    </td>
+                    <td id="reg">
+                        <form th:if="${user != 'Гость'}" th:action="@{/logout}" method="post">
+                            <input type="submit" id="sub" value="Выйти">
+                        </form>
+                        <a th:if="${user == 'Гость'}" th:href="@{/login}"><font size="5" color="#808080" face="Arial"><i>Войти</i></font></a>
+                        <a id="righ" th:if="${user == 'Гость'}" th:href="@{/registration}"><font size="5" color="#808080" face="Arial"><i>Зарегистрироваться</i></font></a>
+                    </td>
+                </tr>
+            </table>
+        </nav>
+    </div>
+</div>
+
+<div th:fragment="row">
+    <div class="row mb-3">
+        <div class="col-4 themed-grid-col">
+            <input type="text" name="foodName" placeholder="Название продукта" class="form-control">
+        </div>
+        <div class="col-4 themed-grid-col">
+            <input type="text" name="foodQuantity" placeholder="Количество в граммах" class="form-control">
+        </div>
+        <div class="col-4 themed-grid-col">
+            <input type="text" name="foodCalories" placeholder="Количество калорий на 100 грамм" class="form-control">
+        <button type="button" class="del_variant" style="margin-top:5px">Удалить</button>
+        </div>
+    </div>
+</div>
+
+<div th:fragment="footer">
+    <a href="/developer"></a>
+</div>

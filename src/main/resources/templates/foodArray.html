@@ -1,0 +1,440 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+          .head {
+            background-color: #151515;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 130px;
+            z-index: 1;
+          }
+          .header {
+            margin-top: 30px;
+            margin-left: 30px;
+          }
+          .header a {
+            margin-left: 20px;
+          }
+          #navbar {
+            width: 300px;
+            height: 100%;
+            float: left;
+            margin-top: 150px;
+            margin-bottom: 60px;
+          }
+          #navbar li {
+            list-style-type: none;
+            border-left: 10px solid #666;
+            border-bottom: 1px solid #666;
+          }
+          #navbar a {
+            background-color: #949494;
+            color: #fff;
+            padding: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            border-left: 5px solid #33ADFF;
+            display: block;
+          }
+          #ri {
+            width: 300px;
+            height: 100%;
+            }
+          #right-side {
+            position: fixed;
+            top: 150px;
+            right: 0;
+          }
+          #reciepe {
+            overflow: auto;
+            width: 300px;
+            height: 610px;
+            position: fixed
+            right: 0;
+            bottom: 0;
+            background-color: #949494;
+            border: 2px solid #151515;
+          }
+          #reciepe .pos {
+            border-bottom: 2px solid #666;
+          }
+          #reciepe .pos .posName {
+            font-weight: bold;
+            margin-left: 10px;
+            margin-bottom: -2px;
+          }
+          #reciepe .pos input {
+            width: 75px;
+            margin-left: 5px;
+            margin-bottom: 5px;
+          }
+          #reciepe-res {
+            width: 300px;
+            height: 150px;
+            right: 5px;
+            float: left;
+            background-color: #949494;
+            border: 2px solid #151515;
+            border-top: 1px solid #151515;
+          }
+          #reciepe-res p {
+            font-weight: bold;
+            font-size: 12px;
+            margin-left: 10px;
+            margin-bottom: 0px;
+          }
+          #reciepe-res input {
+            width: 140px;
+            height: 30px;
+            margin-left: 3px;
+          }
+          #reciepe-res div {
+            color: red;
+            text-align: center;
+          }
+          #reciepe-res button {
+            text-align: center;
+            width: 140px;
+            font-size: 15px;
+            margin-left: 3px;
+            margin-top: 5px;
+          }
+          #footer {
+            position: fixed;
+            width: 100%;
+            height: 40px;
+            bottom: 0;
+            background-color: #151515;
+            text-align: center;
+         }
+         #footer a {
+            font-size: 20px;
+            color: #949494;
+         }
+          .foodBlock {
+            width: 100%;
+            height: 100%;
+            float: left;
+            display: none;
+            list-style: none;
+            margin-top: 150px;
+            margin-bottom: 60px;
+            margin-left: 70px;
+            margin-right: 300px;
+          }
+          .foodN {
+            border: 2px solid #000;
+            width: 250px;
+            height: 250px;
+            background-color: #c0c0c0;
+            display: inline-block;
+            margin-top:20px;
+            margin-left:20px;
+          }
+          .foodN img {
+            width: 236px;
+            height: 175px;
+            margin-left: 5px;
+            margin-top:5px;
+          }
+          .foodN p {
+            text-align: center;
+            margin-top: 0em;
+            margin-bottom: -0.5em;
+            font-weight: bold;
+            }
+          .foodN a[th:text] {
+            margin-left: 5px;
+            font-size: 12px;
+            }
+          .add {
+            margin-left: 1px;
+            background-color: #32CD32;
+            color: white;
+            font-weight: bold;
+            width: 244px;
+            height: 25px;
+            position: absolute;
+            }
+          .add:hover {
+            background-color: #006400;
+            }
+        .overlay {
+          position: fixed;
+          z-index: 5;
+          height: 100%;
+          width: 100%;
+          top: 0;
+          left: 0;
+          background-color: rgba(0,0,0,0.6);
+          display: none;
+        }
+        .overlay.active {
+          display: block;
+        }
+        .overlay .flex-popup {
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+        .overlay .flex-popup .popup {
+          position: relative;
+          background-color: #D8D8D8;
+          padding: 35px 25px;
+          margin: 0 10px;
+          border: 6px double black;
+          border-radius: 10px;
+          max-width: 560px;
+        }
+        .closeBtn {
+          background: red;
+          font-weight: bold;
+          color: white;
+        }
+        .addBtn {
+          background: green;
+          font-weight: bold;
+          color: white;
+        }
+        .overlay .flex-popup .popup div {
+          color: red;
+        }
+        #choose img {
+            width: 100%;
+            height: 100%;
+            margin-top: 130px;
+        }
+        #choose1 {
+            font-size: 30px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .del {
+            width: 23px;
+            height: 23px;
+            background: red;
+            font-weight: bold;
+            color: white;
+        }
+        #reciepe-name {
+            width: 500px;
+            height: 30px;
+            margin-right: 30px;
+        }
+        #reciepe-text {
+            width: 500px;
+            height: 500px;
+            margin-top: 20px;
+            vertical-align: top;
+        }
+        #sub {
+            border:none;
+            padding:0;
+            margin:0;
+            font-size:25px;
+            color:#808080;
+            background-color:transparent;
+            font-family: Arial;
+            font-style: italic;
+            margin-right: 40px;
+        }
+        #reg {
+            text-align: right;
+        }
+        #righ {
+            margin-right: 40px;
+        }
+        .warning {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+<header th:insert="blocks/fragments :: header"></header>
+    <table width="100%" cellspacing="0" cellpadding="5">
+        <tr id="table">
+            <td id="navbar">
+                <li><a href="#" id="nutsPage">Орехи</a></li>
+                <li><a href="#" id="mushroomsPage">Грибы</a></li>
+                <li><a href="#" id="porridgePage">Крупы и макароны</a></li>
+                <li><a href="#" id="seafoodPage">Морепродукты</a></li>
+                <li><a href="#" id="meatPage">Мясо</a></li>
+                <li><a href="#" id="sausagePage">Колбасные изделия</a></li>
+                <li><a href="#" id="vegetablePage">Овощи</a></li>
+                <li><a href="#" id="fruitPage">Фрукты и ягоды</a></li>
+                <li><a href="#" id="conservePage">Консервация</a></li>
+                <li><a href="#" id="milkPage">Молочные продукты и яйца</a></li>
+                <li><a href="#" id="drinkPage">Напитки</a></li>
+            </td>
+            <td id="cont" valign="top">
+                <div id="choose">
+                    <img src="images/choose.jpg">
+                </div>
+                <div id="foodNuts" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'nut'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" id="add" value="Добавить" class="add">
+                    </div>
+                </div>
+                <div id="foodMushrooms" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'mushroom'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" value="Добавить" class="add">
+                    </div>
+                </div>
+                <div id="foodPorridge" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'porridge'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" value="Добавить" class="add">
+                    </div>
+                </div>
+                <div id="foodSeafood" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'seafood'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" value="Добавить" class="add">
+                    </div>
+                </div>
+                <div id="foodMeat" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'meat'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" value="Добавить" class="add">
+                    </div>
+                </div>
+                <div id="foodSausage" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'sausage'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" value="Добавить" class="add">
+                    </div>
+                </div>
+                <div id="foodVegetable" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'vegetable'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" value="Добавить" class="add">
+                    </div>
+                </div>
+                <div id="foodFruit" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'fruit'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" value="Добавить" class="add">
+                    </div>
+                </div>
+                <div id="foodConserve" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'conserve'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" value="Добавить" class="add">
+                    </div>
+                </div>
+                <div id="foodMilk" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'milk'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" value="Добавить" class="add">
+                    </div>
+                </div>
+                <div id="foodDrink" class="foodBlock">
+                    <div class="foodN" th:each="elem : ${food}" th:if="${elem.type == 'drink'}">
+                        <img th:src="${elem.image}">
+                        <p th:text="${elem.name}"></p>
+                        <a>Ккал на 100 грамм:</a>
+                        <strong><a th:text="${elem.calories}"></a></strong></br>
+                        <input type="button" value="Добавить" class="add">
+                    </div>
+                </div>
+            </td>
+            <td id="ri">
+                <div id="right-side">
+                    <div id="reciepe">
+                        <div id="choose1">
+                            <a><i>Здесь будут располагаться выбранные Вами продукты</i></a>
+                        </div>
+                    </div>
+                    <div id="reciepe-res">
+                        <p><i>Суммарный вес: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Содержание калорий:</i></p>
+                        <input placeholder="0" id="resQua" type="text" background-color="white" readonly>
+                        <input placeholder="0" id="resCal" type="text" background-color="white" readonly>
+                        <p><i>Порция (грамм): &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Содержание калорий:</i></p>
+                        <input placeholder="Укажите объем" id="porQua" type="text" background-color="white">
+                        <input placeholder="0" id="porCal" type="text" background-color="white" readonly>
+                        <div id="error1"></div>
+                        <button th:if="${user != 'Гость'}" id="save" disabled>Сохранить блюдо</button>
+                        <button th:if="${user != 'Гость'}" id="clear" disabled>Удалить блюдо</button>
+                        <div th:if="${user == 'Гость'}" class="warning">
+                            <a><font size="2" color="black"><i>Сохранение рецептов доступно только авторизованным пользователям</i></font></a>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+    </table>
+    <footer id="footer"><a href="/developer">Связь с разработчиком</a></footer>
+    <div class="overlay" id="modal-background">
+        <div class="flex-popup" id="flex">
+            <div class="popup" id="popup">
+                <input class="input" placeholder="Введите количество в граммах" id="quantity" type="text" width="50px" background-color="white">
+                <input class="input" name="calor" id="calor" placeholder="Результат в калориях" readonly>
+                <input id="inv" type="hidden">
+                <div id="error"></div>
+                <button th:if="${user != 'Гость'}" id="addToRes" class="addBtn" title="Добавить">Добавить</button>
+                <button th:if="${user != 'Гость'}" id="butClose" class="closeBtn" title="Отмена">Закрыть</button>
+                <div th:if="${user == 'Гость'}" class="warning">
+                    <a><font size="2" color="black"><i>Для добавления продукта в</br> рецепт необходима авторизация</i></font></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="overlay" id="reciepe-background" style-display="none">
+        <div class="flex-popup" id="reciepe-flex">
+            <div class="popup" id="reciepe-popup">
+                <form action="/foodArray" method="post">
+                    <input id="reciepe-name" name="name" type="text" placeholder="Введите название блюда">
+                    <textarea id="reciepe-text" name="reciepe" placeholder="Введите рецепт блюда"></textarea>
+                    <input id="reciepe-weight" name="weight" type="hidden">
+                    <input id="reciepe-calories" name="calories" type="hidden">
+                    <input id="reciepe-info" name="info" type="hidden">
+                    <button type="submit" id="reciepe-addToRes" class="addBtn" title="Добавить">Добавить</button>
+                    <button id="reciepe-butClose" class="closeBtn" title="Отмена">Закрыть</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script th:inline="javascript" src="js/script.js"></script>
+</body>
+</html>

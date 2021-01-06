@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+         .head {
+            background-color: #151515;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 130px;
+            z-index: 1;
+         }
+         .header {
+            margin-top: 30px;
+            margin-left: 30px;
+         }
+         .header a {
+            margin-left: 20px;
+         }
+         #footer {
+            position: fixed;
+            width: 100%;
+            height: 40px;
+            bottom: 0;
+            background-color: #151515;
+            text-align: center;
+         }
+         #footer a {
+            font-size: 20px;
+            color: #949494;
+         }
+         body {
+            margin: 0;
+         }
+         #developer {
+            width: 100%;
+            height: 100%;
+            float: left;
+            list-style: none;
+            margin-top: 300px;
+            margin-bottom: 60px;
+            margin-left: 400px;
+            margin-right: 300px;
+         }
+         #sub {
+            border:none;
+            padding:0;
+            margin:0;
+            font-size:25px;
+            color:#808080;
+            background-color:transparent;
+            font-family: Arial;
+            font-style: italic;
+            margin-right: 40px;
+        }
+        #reg {
+            text-align: right;
+        }
+        #righ {
+            margin-right: 40px;
+        }
+        A {
+            color: black;
+        }
+        A:visited {
+            color: black;
+        }
+        A:active {
+            color: black;
+        }
+    </style>
+</head>
+
+<body>
+<header th:insert="blocks/fragments :: header"></header>
+    <div id="developer">
+        <li><a href="https://www.vk.com/reggaeton_coach"><strong>VK</strong></a></li>
+        <li><a href="https://www.instagram.com/coachreggaeton"><strong>Insta</strong></a></li>
+    </div>
+<footer id="footer"><a href="/developer">Связь с разработчиком</a></footer>
+</body>
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style>
+         .head {
+            background-color: #151515;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 130px;
+            z-index: 1;
+         }
+         .header {
+            margin-top: 30px;
+            margin-left: 30px;
+         }
+         .header a {
+            margin-left: 20px;
+         }
+         #footer {
+            position: fixed;
+            width: 100%;
+            height: 40px;
+            bottom: 0;
+            background-color: #151515;
+            text-align: center;
+         }
+         #footer a {
+            font-size: 20px;
+            color: #949494;
+         }
+         body {
+            margin: 0;
+         }
+         #recip {
+            margin-top: 130px;
+            width: 100%;
+            height: 100%;
+         }
+         .nameTop {
+            width: 100%;
+            height: 50px;
+            background-color: #D8D8D8;
+            font-weight: bold;
+            font-size: 40px;
+            text-align: center;
+         }
+         .tab {
+            width: 100%;
+            height: 100%;
+            border-bottom: 2px solid #000;
+            border-top: 2px solid #000;
+         }
+         .arrayFood {
+            width: 100%;
+            height: 100%;
+         }
+         .arrayFood p {
+            font-weight: bold;
+            font-size: 20px;
+            margin-left: 150px;
+         }
+         .weiCal {
+            width: 100%;
+            height: 100%;
+            text-align: right;
+         }
+         .weiCal p {
+            font-weight: bold;
+            font-size: 20px;
+            margin-right: 150px;
+            margin-bottom: 0px;
+            margin-top: 0px;
+         }
+         .full_text {
+            white-space: pre-wrap;
+            margin-left: 100px;
+            margin-right: 100px;
+            font-size: 20px;
+         }
+         #sub {
+            border:none;
+            padding:0;
+            margin:0;
+            font-size:25px;
+            color:#808080;
+            background-color:transparent;
+            font-family: Arial;
+            font-style: italic;
+            margin-right: 40px;
+        }
+        #reg {
+            text-align: right;
+        }
+        #righ {
+            margin-right: 40px;
+        }
+    </style>
+</head>
+
+<body>
+<header th:insert="blocks/fragments :: header"></header>
+<div id="recip">
+    <div th:each="elem : ${reciepe}" class="recipe">
+        <div class="nameTop">
+            <p th:text="${elem.name}"></p>
+        </div>
+        <div class="tab">
+            <table width="100%" cellspacing="0">
+                <tr>
+                    <td>
+                        <div class="arrayFood">
+                            <a id="hiddenText" th:text="${elem.info}" hidden/>
+                            <p id="arFo"/>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="weiCal">
+                            <p>Общий вес блюда -
+                            <a id="full_weight" th:text="${elem.weight}"/>
+                            <a> гр</a></p>
+                            <p>Общее количество калорий -
+                            <a id="full_calories" th:text="${elem.calories}"/>
+                            <a> ккал</a></p>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="full_text">
+            <p th:text="${elem.reciepe}"/>
+        </div>
+    </div>
+</div>
+
+<script>
+    var x = document.getElementById("hiddenText").innerHTML;
+    var aF = x.replace("null", '');
+    var arrayF = aF.replace(new RegExp("!",'g'), '<br>');
+    document.getElementById("arFo").innerHTML = arrayF;
+</script>
+<footer id="footer"><a href="/developer">Связь с разработчиком</a></footer>
+</body>
+</html>
