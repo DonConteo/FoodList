@@ -11,9 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-
 import java.util.ArrayList;
-import java.util.Optional;
 
 @Controller
 public class RecipesController {
@@ -29,20 +27,20 @@ public class RecipesController {
 
     @GetMapping("/recipes")
     public String recipesView(@AuthenticationPrincipal User user, Model model) {
-        Iterable<Reciepe> recipes = reciepeRepo.getRecipesForUser(user.getId());
-        model.addAttribute("reciepes", recipes);
+        model.addAttribute("title", "Рецепты");
+        model.addAttribute("reciepes", reciepeRepo.getRecipesForUser(user.getId()));
         model.addAttribute("user", user.getUsername());
         return "recipes";
     }
 
     @GetMapping("/recipes/{id}")
     public String recipeDetails(@AuthenticationPrincipal User user, @PathVariable(value="id") long id, Model model) {
+        model.addAttribute("title", "Рецепт");
         if(!reciepeRepo.existsById(id)){
             return "redirect:/home";
         }
-        Optional<Reciepe> recipe = reciepeRepo.findById(id);
         ArrayList<Reciepe> result = new ArrayList<>();
-        recipe.ifPresent(result::add);
+        reciepeRepo.findById(id).ifPresent(result::add);
         model.addAttribute("reciepe", result);
         model.addAttribute("user", user.getUsername());
         return "reciepeDetails";
@@ -50,8 +48,7 @@ public class RecipesController {
 
     @PostMapping("/recipes/{id}/remove")
     public String recipeDelete(@AuthenticationPrincipal User user, @PathVariable(value="id") long id, Model model) {
-        Reciepe reciepe = reciepeRepo.findById(id).orElseThrow();
-        reciepeRepo.delete(reciepe);
+        reciepeRepo.delete(reciepeRepo.findById(id).orElseThrow());
         Iterable<Reciepe> recipes = reciepeRepo.getRecipesForUser(user.getId());
         if(user != null){
             model.addAttribute("reciepes", recipes);

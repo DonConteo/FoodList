@@ -1,7 +1,6 @@
 package com.dmitriy.tsoy.russia.FoodList.controllers;
 
 import com.dmitriy.tsoy.russia.FoodList.domain.User;
-import com.dmitriy.tsoy.russia.FoodList.models.FoodArrayModel;
 import com.dmitriy.tsoy.russia.FoodList.models.Reciepe;
 import com.dmitriy.tsoy.russia.FoodList.repo.FoodArrayRepo;
 import com.dmitriy.tsoy.russia.FoodList.repo.ReciepeRepo;
@@ -25,9 +24,8 @@ public class FoodArrayController {
 
     @GetMapping("/foodArray")
     public String FoodArray(@AuthenticationPrincipal User user, Model model) {
-        Iterable<FoodArrayModel> foodArray = foodArrayRepo.findAll();
-        model.addAttribute("food", foodArray);
-        model.addAttribute("title", "Главная страница");
+        model.addAttribute("food", foodArrayRepo.findAll());
+        model.addAttribute("title", "Список продуктов");
         if(user != null){
             model.addAttribute("user", user.getUsername());
             return "foodArray";
@@ -43,8 +41,7 @@ public class FoodArrayController {
                                             @RequestParam(required = true) int weight,
                                             @RequestParam(required = true) int calories,
                                             @RequestParam(required = true) String info){
-        Reciepe rec = new Reciepe(name, reciepe, weight, calories, info, user);
-        reciepeRepo.save(rec);
+        reciepeRepo.save(new Reciepe(name, reciepe, weight, calories, info, user));
         return "redirect:/foodArray";
     }
 }
