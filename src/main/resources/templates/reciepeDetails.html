@@ -139,7 +139,8 @@
 <script>
     var x = document.getElementById("hiddenText").innerHTML;
     var aF = x.replace("null", '');
-    var arrayF = aF.replace(new RegExp("!",'g'), '<br>');
+    var cF = aF.replace("-  гр", '');
+    var arrayF = cF.replace(new RegExp("!",'g'), '<br>');
     document.getElementById("arFo").innerHTML = arrayF;
 </script>
 <footer id="footer"><a href="/developer">Связь с разработчиком</a></footer>

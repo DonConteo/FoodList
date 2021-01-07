@@ -51,6 +51,48 @@
         #righ {
             margin-right: 40px;
         }
+        .overlay {
+            position: fixed;
+            z-index: 5;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            background-color: rgba(0,0,0,0.6);
+            display: none;
+        }
+        .overlay.active {
+            display: block;
+        }
+        .overlay .flex-popup {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .overlay .flex-popup .popup {
+            position: relative;
+            background-color: #D8D8D8;
+            padding: 35px 25px;
+            margin: 0 10px;
+            border: 6px double black;
+            border-radius: 10px;
+            max-width: 560px;
+        }
+        #variants{
+            margin-top: 150px;
+        }
+        #reciepe-name {
+            width: 500px;
+            height: 30px;
+            margin-right: 30px;
+        }
+        #reciepe-text {
+            width: 500px;
+            height: 500px;
+            margin-top: 20px;
+            vertical-align: top;
+        }
     </style>
     <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
@@ -69,35 +111,35 @@
             <a class="p-2 text-muted"></a><i> Итоговое количество калорий на </i></a>
         </div>
         <div>
-            <p id="resultQuantity" type="text" name="Quantity" placeholder="0" class="form-control" style="margin-left:10px"></p>
+            <input id="resultQuantity" type="text" placeholder="0" style="margin-left:10px" readonly>
         </div>
         <div>
             <a class="p-2 text-muted"></a><i> грамм = </i></a>
         </div>
         <div>
-            <p id="resultCalories" type="text" name="Calories" placeholder="0" class="form-control" style="margin-left:10px"></p>
+            <input id="resultCalories" type="text" placeholder="0" style="margin-left:10px" readonly>
             <div id="error"></div>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div>
-            <a type="text">Грамм в порции = </a>
-        </div>
-        <div>
-            <input type="text" id="quan" placeholder="0" class="form-control" oninput="calculate()">
-        </div>
-        <div>
-            <a type="text">Калорий в порции = </a>
-        </div>
-        <div>
-            <a id="calo" type="text" placeholder="0" class="form-control"></a>
         </div>
     </div>
     <div id="buttonDiv">
         <button th:if="${user != 'Гость'}" id="save" disabled>Сохранить блюдо</button>
-        <button th:if="${user != 'Гость'}" id="clear" disabled>Удалить блюдо</button>
         <div th:if="${user == 'Гость'}" class="warning">
             <a><font size="2" color="black"><i>Сохранение рецептов доступно только авторизованным пользователям</i></font></a>
+        </div>
+    </div>
+    <div class="overlay" id="reciepe-background" style-display="none">
+        <div class="flex-popup" id="reciepe-flex">
+            <div class="popup" id="reciepe-popup">
+                <form action="/calculator" method="post">
+                    <input id="reciepe-name" name="name" type="text" placeholder="Введите название блюда">
+                    <textarea id="reciepe-text" name="reciepe" placeholder="Введите рецепт блюда"></textarea>
+                    <input id="reciepe-weight" name="weight" type="hidden">
+                    <input id="reciepe-calories" name="calories" type="hidden">
+                    <input id="reciepe-info" name="info" type="hidden">
+                    <button type="submit" id="reciepe-addToRes" class="addBtn" title="Добавить" style="width:500px">Добавить</button>
+                </form>
+                    <button id="reciepe-butClose" class="closeBtn" title="Отмена" style="width:500px">Закрыть</button>
+            </div>
         </div>
     </div>
 </div>
